@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Resend OTP</title>
+</head>
+
+<body>
+
+    <p id="ptag">00:30</p>
+
+    <br>
+    <button id="otpbtn" onclick="startOTPTimer()">Send OTP</button>
+
+
+    <script>
+
+        var otpbtn = document.getElementById("otpbtn");
+        var ptag = document.getElementById("ptag");
+        var count = 30;
+        var interval = null;
+
+        function startOTPTimer() {
+            if (!interval) {
+
+                interval = setInterval(() => {
+                    --count;
+                    otpbtn.disabled = true;
+
+                    if (count === 0) {
+                        otpbtn.innerHTML = 'Resend OTP';
+                        otpbtn.disabled = false;
+                        clearInterval(interval);
+                        interval = null;
+                        count = 30;
+                        alert("Click on Reset OTP Button")
+                    }
+                    ptag.innerHTML = `00:${count < 10 ? '0'+count : count}`;
+                }, 1000)
+            }
+
+        }
+
+
+    </script>
+
+</body>
+
+</html>

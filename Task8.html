@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Guess The Number</title>
+
+    <script>
+
+        var number = 0;
+        var right =0;
+        var wrong = 0;
+        var total = 0;
+        function generateRandomNumber(){
+            number = Math.random()
+            number = Math.round(number*10)
+            console.log(number)
+        }
+
+        
+        function checkNumber(){
+            generateRandomNumber()
+            
+            inpval = document.getElementById("numtxt").value
+
+            if(inpval == ""){
+                
+                document.getElementById("numtxt").style.borderColor = 'red';
+                document.getElementById("numtxt").title = 'Valid Number Enter'
+                alert("Enter Number") 
+                return false;
+            }
+
+
+            if (parseInt(inpval) === parseInt(number)) {
+                right++
+                total += 1
+            }else{
+                wrong++
+                total -= 1
+
+            }
+
+            document.getElementById("totalans").innerHTML = total;
+            document.getElementById("rightans").innerHTML = right;
+            document.getElementById("wrongans").innerHTML = wrong;
+
+
+            document.getElementById("numtxt").value = ''
+            
+        }
+
+    </script>
+
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+        }
+
+        div{
+            padding: 50px;
+            width: 50%;
+            min-height: 150px;
+            background-color: bisque;
+            border-radius: 10px;
+            margin: auto;
+            margin-top: 50px;
+            text-align: center;
+        }
+
+        #numtxt{
+            width: 200px;
+            height: 30px;
+            margin: 10px 0px;
+            text-align: center;
+        }
+
+        .btn{
+            width: 100px;
+            height: 50px;
+            border: none;
+            border-radius: 20px;
+            background-color: cornflowerblue;
+            color: white;
+            margin-bottom: 10px;
+        }
+
+        .btn:hover{
+            background-color: rgb(75, 137, 252);
+        }
+
+    </style>
+
+
+</head>
+<body>
+    
+    <div>
+        <h1>Guess The Number</h1>
+
+        <input type="number" id="numtxt" placeholder="Number here"/>
+
+        <br/>
+
+        <input type="button" class="btn" onclick="checkNumber()" value="check" />
+
+        <br/>
+
+        <p >Total = <b> <span id="totalans"></span> </b></p>
+        <p >Right =<b> <span id="rightans" style="color: green;"></span> </b></p>
+        <p >Wrong =<b> <span id="wrongans" style="color: red;"></span></b></p>
+
+    </div>
+
+</body>
+</html>

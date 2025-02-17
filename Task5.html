@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Random background</title>
+</head>
+<body id="bodytag">
+    
+
+
+    <script>
+
+        var bodytag = document.getElementById("bodytag");
+
+        var colorArray = ['red','yellow','green','blue','grey'];
+
+        var randomIndex = Math.random();
+
+        bodytag.style.backgroundColor = colorArray[Math.floor( randomIndex*4)];
+
+    </script>
+
+</body>
+</html>

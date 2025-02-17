@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Marksheet</title>
+
+    <script>
+
+        // Style Reseting
+
+        function resetStyle() {
+            var inputs = document.getElementsByTagName("input");
+
+            for (let i = 0; i < inputs.length; i++) {
+
+                if (inputs[i].type === "text" || inputs[i].type === "number") {
+                    inputs[i].style.borderColor = 'black';
+                    inputs[i].title = '';
+                }
+
+            }
+        }
+
+        function addData() {
+            //All Variables
+            var total = 0;
+            var ResultP = document.getElementById("ResultP");
+            var marks1 = parseInt(marks1txt.value)
+            var marks2 = parseInt(marks2txt.value)
+            var marks3 = parseInt(marks3txt.value)
+            var marks4 = parseInt(marks4txt.value)
+            var marks5 = parseInt(marks5txt.value)
+            var total = marks1 + marks2 + marks3 + marks4 + marks5;
+            var percentage = (total * 100) / 500;
+            var isvalid = true;
+            var Grade = '';
+
+            //Check Fail or not in any subject
+            if (marks1 < 35 || marks2 < 35 || marks3 < 35 || marks4 < 35 || marks5 < 35) {
+                percentage = 0;
+                alert("You're Fail!!! You have less than 35 in any of subject")
+            }
+
+            //Grade Calculation
+            if (percentage >= 80) {
+                Grade = 'A+';
+            } else if (percentage >= 70) {
+                Grade = 'A';
+            } else if (percentage >= 50) {
+                Grade = 'B';
+            } else if (percentage >= 35) {
+                Grade = 'C';
+            } else {
+                Grade = 'F';
+            }
+
+            // check not null and textbox must have > 0 and < 100 value
+
+            if (nametxt.value === "") {
+                nametxt.style.borderColor = 'red';
+                nametxt.title = 'Valid Marks Enter';
+                isvalid = false;
+            }
+
+            if (enrolltxt.value === "") {
+                enrolltxt.style.borderColor = 'red';
+                enrolltxt.title = 'Valid Marks Enter';
+                isvalid = false;
+            }
+
+            if (marks1txt.value === "" || parseInt(marks1txt.value) < 0 || parseInt(marks1txt.value) > 100) {
+                marks1txt.style.borderColor = 'red';
+                marks1txt.title = 'Valid Marks Enter';
+                isvalid = false;
+            }
+            if (marks2txt.value == "" || parseInt(marks2txt.value) < 0 || parseInt(marks2txt.value) > 100) {
+                marks2txt.style.borderColor = 'red';
+                marks2txt.title = 'Valid Marks Enter';
+                isvalid = false;
+            }
+            if (marks3txt.value == "" || parseInt(marks3txt.value) < 0 || parseInt(marks3txt.value) > 100) {
+                marks3txt.style.borderColor = 'red';
+                marks3txt.title = 'Valid Marks Enter';
+                isvalid = false;
+            }
+            if (marks4txt.value == "" || parseInt(marks4txt.value) < 0 || parseInt(marks4txt.value) > 100) {
+                marks4txt.style.borderColor = 'red';
+                marks4txt.title = 'Valid Marks Enter';
+                isvalid = false;
+            }
+            if (marks5txt.value == "" || parseInt(marks5txt.value) < 0 || parseInt(marks5txt.value) > 100) {
+                marks5txt.style.borderColor = 'red';
+                marks5txt.title = 'Valid Marks Enter';
+                isvalid = false;
+            }
+
+            // check Valid or not
+
+            if (isvalid) {
+                total = marks1 + marks2 + marks3 + marks4 + marks5;
+                ResultP.innerHTML = `<table>
+                    <tr>
+                        <td>Name : </td>
+                        <td>${nametxt.value}</td>
+                    </tr>
+                    <tr>
+                        <td>Enrollment : </td>
+                        <td>${enrolltxt.value}</td>
+                    </tr>
+                    <tr>
+                        <td>Marks1 : </td>
+                        <td>${marks1 < 35 ? '<span style="color:red;">' + marks1 + '</span>': marks1}</td>
+                    </tr>
+                    <tr>
+                        <td>Marks2 : </td>
+                        <td>${marks2 < 35 ? '<span style="color:red;">' + marks2 + '</span>': marks2}</td>
+                    </tr>
+                    <tr>
+                        <td>Marks3 : </td>
+                        <td>${marks3 < 35 ? '<span style="color:red;">' + marks3 + '</span>': marks3}</td>
+                    </tr>
+                    <tr>
+                        <td>Marks4 : </td>
+                        <td>${marks4 < 35 ? '<span style="color:red;">' + marks4 + '</span>': marks4}</td>
+                    </tr>
+                    <tr>
+                        <td>Marks5 : </td>
+                        <td>${marks5 < 35 ? '<span style="color:red;">' + marks5 + '</span>': marks5}</td>
+                    </tr>
+                    <tr>
+                        <td>Total : </td>
+                        <td><b>${total}/500</b></td>
+                    </tr>
+                    <tr>
+                        <td>Percentage : </td>
+                        <td><b>${percentage < 35 ? '<span style="color:red;">' + percentage + '%</span>' : '<span style="color:green;">' + percentage + '%</span>'}</b></td>
+                    </tr>
+                    <tr>
+                        <td>Grade : </td>
+                        <td id='gradetd'><b>${Grade === 'F' ? '<span style="color:red;">' + Grade + '</span>' : '<span style="color:green;">' + Grade + '</span>'}</b></td>
+                    </tr>
+                    </table>`;
+
+                // Form reset
+                MarksheetForm.reset();
+                //Form styling reset
+                resetStyle();
+            } else {
+                alert(`Enter Valid Marks (0 to 100) 
+                        <br>
+                        or Enter Valid Name and Enrollment
+                `);
+            }
+        }
+
+    </script>
+
+</head>
+
+<body>
+
+    <form id="MarksheetForm" name="MarksheetForm">
+        <table border="1">
+            <tr>
+                <td>Student Name :</td>
+                <td>
+                    <input type="text" id="nametxt" placeholder="Enter Name Here..." required />
+                </td>
+            </tr>
+            <tr>
+                <td>Enrollment Number :</td>
+                <td>
+                    <input type="number" id="enrolltxt" placeholder="Enrollment Here..." />
+                </td>
+            </tr>
+            <tr>
+                <td>Marks1 :</td>
+                <td><input type="number" id="marks1txt" placeholder="Marks1 Here..." /></td>
+            </tr>
+            <tr>
+                <td>
+                    Marks2 :
+                </td>
+                <td>
+                    <input type="number" id="marks2txt" placeholder="Marks2 Here..." />
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    Marks3 :
+                <td>
+                    <input type="number" id="marks3txt" placeholder="Marks3 Here..." />
+                </td>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    Marks4 :
+                </td>
+                <td>
+                    <input type="number" id="marks4txt" placeholder="Marks4 Here..." />
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    Marks5 :
+                </td>
+                <td>
+                    <input type="number" id="marks5txt" placeholder="Marks5 Here..." />
+                </td>
+            </tr>
+            <tr>
+                <td colspan="2">
+                    <input type="button" onclick="addData()" value="Add" style="width: 100px; height: 30px;
+                    background-color: cornflowerblue; border: none;cursor: pointer;" />
+                </td>
+            </tr>
+        </table>
+    </form>
+
+    <h1>Result</h1>
+    <p id="ResultP"></p>
+
+</body>
+
+</html>

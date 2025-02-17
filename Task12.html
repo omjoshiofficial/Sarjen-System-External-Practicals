@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>To-Do List</title>
+    <script>
+        // Load data after the DOM is fully loaded
+        document.addEventListener("DOMContentLoaded", loadData);
+
+        function loadData() {
+            var dataTbl = document.getElementById("dataTbl");
+            var tasks = JSON.parse(localStorage.getItem("List")) || [];
+
+            dataTbl.innerHTML = "";
+
+            for (let i = 0; i < tasks.length; i++) {
+                let li = document.createElement("li");
+                li.innerHTML = `${tasks[i]} <button onclick=deleteList(${i}) style="color:red;">X</button>`;
+                dataTbl.appendChild(li);
+            }
+
+        }
+
+        function addData() {
+            var inpval = document.getElementById("datatxt");
+            var dataTbl = document.getElementById("dataTbl");
+
+            // let li = document.createElement("li");
+
+            // li.innerHTML = `${inpval.value} <button onclick=deleteList() style="color:red;">X</button>`;
+
+            // dataTbl.appendChild(li);
+
+            var tasks = JSON.parse(localStorage.getItem("List")) || [];
+
+            tasks.push(inpval.value);
+
+            localStorage.setItem("List", JSON.stringify(tasks));
+
+            inpval.value = "";
+
+            loadData();
+        }
+
+
+        function deleteList(index){
+            var tasks = JSON.parse(localStorage.getItem("List") || []);
+
+            tasks.splice(index,1);
+
+            localStorage.setItem("List", JSON.stringify(tasks));
+
+            loadData();
+        }
+
+    </script>
+</head>
+
+<body>
+
+    <input type="text" id="datatxt" placeholder="Data Here..." />
+
+    <br />
+    <br />
+
+    <input type="button" id="addbtn" value="Add" onclick="addData()" />
+
+    <br />
+
+    <ul id="dataTbl" border="2">
+
+    </ul>
+
+
+</body>
+
+</html>

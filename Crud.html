@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Curd Using Local Storage</title>
+
+    <script>
+        var data = [];
+        var allData = [];
+        var nametxt;
+        var agetxt;
+        var editIndex = -1;
+
+        document.addEventListener("DOMContentLoaded", loadData)
+
+        //Load Data
+        function loadData() {
+
+            nametxt = document.getElementById("nametxt"); // Name Textbox
+            agetxt = document.getElementById("agetxt");// Age Textbox
+
+            var tbody = document.getElementById("tbody"); // tbody
+
+            tbody.innerHTML = ""; // Clear before adding new rows
+
+            allData = JSON.parse(localStorage.getItem("Data")) || [] // Get All LocalStorage Data
+
+            //Add tr in table
+            for (let i = 0; i < allData.length; i++) {
+                let tr = document.createElement("tr");
+
+                tr.innerHTML = `<td>${i + 1}</td>
+                                <td>${allData[i].name}</td>
+                                <td>${allData[i].age}</td>
+                                <td><button onClick='editData(${i})'>Edit</button> | 
+                                <button onClick='deleteData(${i})'>Delete</button></td>
+                                `;
+
+                tbody.appendChild(tr)
+
+            }
+
+        }
+
+        //edit data
+        function editData(index) {
+            allData = JSON.parse(localStorage.getItem("Data")) || [];
+            nametxt.value = allData[index].name;
+            agetxt.value = allData[index].age;
+            editIndex = index;
+            document.getElementById("savebtn").value = "Update";
+        }
+
+        //delete data
+        function deleteData(index) {
+            allData.splice(index, 1);
+            localStorage.setItem("Data", JSON.stringify(allData));
+            loadData();
+        }
+
+        //Save Data
+        function saveData() {
+
+            allData = JSON.parse(localStorage.getItem("Data")) || []
+
+            var newData = {
+                name: nametxt.value,
+                age: agetxt.value
+            }
+
+            if (editIndex === -1) {
+                allData.push(newData) // Insert new data
+            }
+            else{
+                allData[editIndex] = newData; // Update Existing Data
+                editIndex = -1;
+            document.getElementById("savebtn").value = "save";
+
+            }
+
+            localStorage.setItem("Data", JSON.stringify(allData));
+
+            document.getElementById("nametxt").value = "";
+            document.getElementById("agetxt").value = "";
+
+            loadData();
+
+        }
+    </script>
+
+</head>
+
+<body>
+    Name :- <input type="text" id="nametxt" placeholder="Name Here..." />
+    <br><br>
+    Age :- <input type="number" id="agetxt" placeholder="Age Here..." />
+    <br><br>
+    <input type="button" id="savebtn" value="Save" onclick="saveData()" />
+
+    <br />
+    <br />
+
+    <table id="datatbl" border="1">
+
+        <thead>
+            <tr>
+                <th>Index</th>
+                <th>Name</th>
+                <th>Age</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody id="tbody">
+
+        </tbody>
+
+    </table>
+
+</body>
+
+</html>

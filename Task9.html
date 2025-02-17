@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Basic Calculator</title>
+</head>
+<body>
+    
+    Num1 :- <input type="number" id="num1txt" placeholder="Num1 Here..." />
+    <br>
+    <br>
+    Num2 :- <input type="number" id="num2txt" placeholder="Num2 Here..." />
+    <br>
+    <br>
+    Result :- <input type="number" id="resulttxt" readonly />
+    <br>
+    <br>
+    <button onclick="Addition()">Add</button> | 
+    <button onclick="Subtraction()">Sub</button> | 
+    <button onclick="Multiplication()">Mul</button> | 
+    <button onclick="Devision()">Div</button>
+
+    <script>
+
+        var num1txt = document.getElementById("num1txt");
+        var num2txt = document.getElementById("num2txt");
+        var num3txt = document.getElementById("num3txt");
+        var resulttxt = document.getElementById("resulttxt");
+
+        function Addition() {
+            resulttxt.value = parseInt(num1txt.value) + parseInt(num2txt.value);
+        }
+
+        function Subtraction() {
+            resulttxt.value = parseInt(num1txt.value) - parseInt(num2txt.value);
+        }
+
+        function Multiplication() {
+            resulttxt.value = parseInt(num1txt.value) * parseInt(num2txt.value);
+        }
+
+        function Devision(){
+            resulttxt.value = parseInt(num1txt.value) / parseInt(num2txt.value);
+
+        }
+
+
+    </script>
+
+</body>
+</html>

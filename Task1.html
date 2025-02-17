@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Increment Decrement</title>
+
+
+    <script>
+
+        var count = 0;
+
+        var ptag;
+
+        document.addEventListener("DOMContentLoaded",loadTags)
+
+        function loadTags() {
+            ptag = document.getElementById("ptag");
+        }
+
+        function increment(){
+            if (count < 10) {
+                count++;
+            }
+            else{
+                alert("You reached your limit 10")
+            }
+            ptag.innerHTML = count
+        }
+
+        function decrement() {
+            if (count > 0) {
+                count--;
+            }else{
+                alert("You reached your limit 0")
+            }
+            ptag.innerHTML = count
+        }
+
+    </script>
+
+</head>
+<body>
+    
+
+    <p id="ptag">0</p>
+
+    <br>
+
+    <button id="incrementbtn" onclick="increment()">Increment</button>
+    <button id="decrementbtn" onclick="decrement()">Decrement</button>
+
+</body>
+</html>

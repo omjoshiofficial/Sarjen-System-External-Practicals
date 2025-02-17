@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Color Maker</title>
+</head>
+<body>
+    
+    <div id="colorBoard" style="width: 200px; height: 200px; border: 1px solid black;"></div>
+
+    R<input type="range" max="255" id="range1" value="100" onchange="changeValue()"/>
+    <label id="label1">100</label>
+    <br>
+    
+    G<input type="range" max="255" id="range2" value="100" onchange="changeValue()"/>
+    <label id="label2">100</label>
+    
+    <br>
+    
+    B<input type="range" max="255" id="range3" value="100" onchange="changeValue()"/>
+    <label id="label3">100</label>
+
+    <br>
+
+    <script>
+
+        var colorBoard = document.getElementById("colorBoard");
+        var range1 = document.getElementById("range1");
+        var range2 = document.getElementById("range2");
+        var range3 = document.getElementById("range3");
+
+        var label1 = document.getElementById("label1");
+        var label2 = document.getElementById("label2");
+        var label3 = document.getElementById("label3");
+
+
+        function changeValue() {
+            colorBoard.style.backgroundColor = `rgb(${range1.value},${range2.value},${range3.value})`;
+            label1.innerHTML = range1.value;
+            label2.innerHTML = range2.value;
+            label3.innerHTML = range3.value;
+
+        }
+
+
+    </script>
+
+</body>
+</html>

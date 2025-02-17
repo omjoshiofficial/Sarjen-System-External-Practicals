@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Countdown timer</title>
+
+
+    <script>
+        var count = 0;
+        var ptag;
+        var intervalTag;
+        let intervalId = null;
+
+        document.addEventListener("DOMContentLoaded", loadTags);
+
+        function loadTags() {
+            ptag = document.getElementById("ptag");
+            intervalTag = document.getElementById("intervalTag");
+
+        }
+
+        function startTimer() {
+            if (!intervalId) {
+                intervalId = setInterval(() => {
+                    if (count == 10) {
+                        clearInterval(intervalId);
+                        alert("Your count reached limit 10")
+                    } else {
+                        ++count;
+                    }
+                    ptag.innerHTML = count
+                }, 1000)
+            }
+
+        }
+
+        function stopTimer() {
+            intervalTag.innerHTML += `Your interval is ${count} <br>`;
+        }
+
+        function pauseTimer() {
+            clearInterval(intervalId)
+            intervalId = null;
+        }
+
+        function resetTimer() {
+            clearInterval(intervalId)
+            intervalId = null;
+            count = 0;
+            ptag.innerHTML = count;
+            intervalTag.innerHTML = "";
+        }
+
+
+    </script>
+
+</head>
+
+<body>
+
+    <p id="ptag">0</p>
+    <p id="intervalTag"></p>
+
+
+    <br>
+    <button onclick="startTimer()">Start</button>
+    <button onclick="stopTimer()">Stop</button>
+    <button onclick="pauseTimer()">Pause</button>
+    <button onclick="resetTimer()">Reset</button>
+
+
+
+</body>
+
+</html>
